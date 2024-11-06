@@ -1435,7 +1435,7 @@ export default function SideBar() {
                       <span className="link-title">Customers</span>
                     </Link>
                   </li>
-                  <li
+                  {/* <li
                     className={`nav-item ${
                       location.pathname === "/sync" ? "active" : ""
                     }`}
@@ -1444,7 +1444,7 @@ export default function SideBar() {
                       <i className="link-icon" data-feather="refresh-ccw"></i>
                       <span className="link-title">Sync with online</span>
                     </Link>
-                  </li>
+                  </li> */}
                 </>
               )}
             </ul>
