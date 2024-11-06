@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Config;
 use Dotenv\Dotenv;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -39,79 +40,68 @@ class AuthController extends Controller
      */
 
     public function login(Request $request)
+
     {
-        $credentials = $request->only('email', 'password');
-        try {
-            $response = Http::post(env('SAAS_LOGIN_URL','https://saasbackend.macrohealthplus.org/api/v1/login'), $credentials);
-            // return $response;
-            if ($response->status() === 200) {
-                if ($response['code'] === 200) {
+        $data = $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
 
-                    Config::set('database.connections.mysql.database', $response['data']['user']['organization']['db_name']);
-                    app('db')->purge();
-                    $localUser =  User::where('saas_user_id', $response['data']['user']['id'])->first();
+        $user = User::where('email', $data['email'])->first();
 
-                    if ($localUser) {
-                        $user = $response['data']['user'];
-                        $user['user_type'] =  $localUser->user_type;
-                    }
-
-                    return response()->json([
-                        'access_token' => $response['data']['user']['token'],
-                        'token_type' => 'bearer',
-                        'expires_in' => '',
-                        'user' => $user
-                    ]);
-
-                    Artisan::call('cache:clear');
-                    Artisan::call('config:clear');
-                } else {
-                    return response()->json(['error' => $response['message']], 404);
-                }
-            } else {
-                return response()->json(['error' => 'API call failed'], 400);
-            }
-        } catch (\Exception $th) {
-            return response()->json(['error' => 'Server is not responding' . $th->getMessage()], 400);
+        // Check if the password matches
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Incorrect credentials.',
+            ], 401);
         }
-        // }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'access_token' => $token,
+        ], 200);
     }
+
+
+
+
+
+
+
+
+
+
+
     public function register(Request $request)
     {
-        $tokenCredentials =  $request->validate([
-            'token' => 'required|string',
+
+        $credentials =  $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'required|string|min:6',
+            'mobile' => 'required',
+            'user_type' => 'required',
+
         ]);
-        if (env('JWT_SECRET', '6WXtdlLMiJqi8m8Z0LBqQKVhc7VwOLYv7VoGZ6pFOuaFW3ptWFjRDyLBdQ5QBLNO') === $tokenCredentials['token']) {
-          
-            $credentials =  $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email',
-                'mobile' => 'required',
-                'db_name' => 'required',
-                'user_type' => 'required',
-                'saas_user_id' => 'required',
+        $user = new User();
+        $user->password = Hash::make($credentials['password']);
+        $user->name = $credentials['name'];
+        $user->email = $credentials['email'];
+        $user->mobile = $credentials['mobile'];
+        $user->user_type = $credentials['user_type'] == 'admin' ? 'admin' : 'empty';
+        // $token = $user->createToken('auth_token')->plainTextToken;
 
-            ]);
-            Config::set('database.connections.mysql.database', $credentials['db_name']);
-            app('db')->purge();
+        $user->save();
 
-            $user = new User();
-            $user->name = $credentials['name'];
-            $user->email = $credentials['email'];
-            $user->mobile = $credentials['mobile'];
-            $user->db_name = $credentials['db_name'];
-            $user->user_type = $credentials['user_type'] == 'admin' ? 'admin' : 'empty';
-            $user->saas_user_id = (int)$credentials['saas_user_id'];
-            $user->save();
-            return response()->json([
-                'message' => 'User created sucessfully',
-                'user' => $user
-            ], 200);
-        }else{
-            return response()->json([
-                'message' => 'token is not valid',
-            ], 400);
-        }
+
+
+        return response()->json([
+            'message' => 'User created successfully',
+            'user' => $user,
+
+        ], 200);
     }
 
 
