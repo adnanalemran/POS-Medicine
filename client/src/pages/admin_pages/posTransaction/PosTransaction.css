@@ -1,0 +1,167 @@
+.tran .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #000 !important;
+  background-color: #fff !important;
+  border-bottom: 2px solid #61a822 !important;
+}
+
+.tran .nav-link {
+  color: #71757c;
+}
+.tran__card_1 .card {
+  border: 1px solid #ecaa33 !important;
+  border-right: 6px solid #e8aba4 !important;
+  border-bottom: 2px solid #f1cdc9 !important;
+}
+
+.tran__card_2 .card {
+  border: 1px solid #f3ca7e !important;
+  border-right: 6px solid #73d480 !important;
+  border-bottom: 2px solid #85eb93 !important;
+}
+
+.tran__card_3 .card {
+  border: 1px solid #ecaa33 !important;
+  border-right: 6px solid #ab96f7 !important;
+  border-bottom: 2px solid #ab96f7 !important;
+}
+.tran li .nav-link {
+  font-weight: 600;
+}
+
+.billing_status .card-body {
+  padding: 10px 10px;
+}
+.transaction-email-table table {
+  width: 100%;
+}
+.transaction-email-table table td {
+  border: 1px solid #e5e5e5;
+  text-align: center;
+}
+.transaction-invoice {
+  display: none;
+}
+.daily-report {
+  display: none;
+  margin-bottom: 7px;
+}
+.daily-sales-report-table table td {
+  border: 1px solid #e5e5e5;
+  /* text-align: center; */
+  padding-left: 2px;
+  font-size: 12px;
+}
+@media print {
+  .transaction-invoice {
+    display: block;
+  }
+  .daily-report {
+    display: block;
+  }
+  .daily-sales-report-table {
+    margin: 0.5in;
+    margin-bottom: 0.5in;
+  }
+  .daily-sales-report-table table td {
+    font-size: 10px;
+  }
+}
+.daily-report {
+  font-family: "Kanit", sans-serif;
+}
+.daily-sales-report-table table {
+  width: 100%;
+}
+
+.billing_status .dcVXPU > .wrapper {
+  font-size: 13px !important;
+}
+.billing_status .dcVXPU {
+  height: 34px !important;
+}
+.billing_status .jMcrRR {
+  min-height: 31px !important;
+}
+
+.money-amount-box {
+  padding: 5px;
+  width: 80px;
+  box-shadow: 0px 4.62654px 10.7953px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.money-receipt-head {
+  padding: 7px;
+  box-shadow: 0px 4.62654px 10.7953px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  font-weight: 500;
+  display: block;
+}
+.payment-invoice-data {
+  width: 70px;
+  display: inline-block;
+}
+.report-table-wrapper {
+  max-height: 420px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.report-org-name {
+  max-width: 240px;
+}
+.report-org-address {
+  max-width: 220px;
+}
+.loading-overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  /* background-color: rgb(0, 0, 0); */
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+.overlay-content {
+  position: relative;
+  top: 32%;
+  width: 100%;
+  text-align: center;
+  left: 1%;
+  margin-top: 30px;
+  margin: auto;
+}
+
+.overlay-content .loader {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #de3500 #0000 #fff #0000;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: 1s rotate linear infinite;
+}
+.overlay-content .loader:before,
+.loader:after {
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  border: 10px solid transparent;
+  border-bottom-color: #fff;
+  transform: translate(-10px, 19px) rotate(-35deg);
+}
+.overlay-content .loader:after {
+  border-color: #de3500 #0000 #0000 #0000;
+  transform: translate(32px, 3px) rotate(-35deg);
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

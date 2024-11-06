@@ -1,0 +1,747 @@
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
+import http from '../../../http';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import AuthUser from '../../../Components/AuthUser';
+import moment from 'moment';
+// import {user} from "../../../../public/assets/vendors/feather-icons/feather";
+import Select from 'react-select';
+import MaterialTable from 'material-table';
+function ViewManagerPurchaseOrder() {
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+  const { http, user } = AuthUser();
+
+  // const [isActive, setIsActive] = useState(false);
+  const [purchase_order_no_id, setPurchaseOrderId] = useState();
+  const [vat, setVat] = useState([]);
+  const [tax, setTax] = useState([]);
+  const [commission, setCommission] = useState([]);
+
+  const [delivery_mode, setDeliveryMode] = useState([]);
+  const [delivery_channel, setDeliveryChannel] = useState([]);
+  const [payment_mode, setPaymentMode] = useState([]);
+  const [payment_channel, setPaymentChannel] = useState([]);
+
+  // const handlePoInput = (e) => {
+  //     setPurchaseOrderId(e.id);
+  // }
+
+  const [selectedDMValue, setDMSelect] = useState();
+  const handleDMChange = (e) => {
+    setDMSelect(e.id);
+  };
+
+  const [selectedPMValue, setPMSelect] = useState();
+  const handlePMChange = (e) => {
+    setPMSelect(e.id);
+  };
+
+  const [selectedPCValue, setPCSelect] = useState();
+  const handlePCChange = (e) => {
+    setPCSelect(e.id);
+  };
+
+  const [selectedDCValue, setDCSelect] = useState();
+  const handleDCChange = (e) => {
+    setDCSelect(e.id);
+  };
+
+  // product requisition
+  const [filteredMedicine, setFilteredMedicine] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [searchWord, setSearchWord] = useState('');
+
+  // console.log("latest cart",cart)
+  const total_amount = cart.reduce(
+    (total, item) => total + parseFloat(item.totalPrice),
+    0,
+  );
+  const commission_amount = cart.reduce(
+    (previousValue, currentValue) =>
+      previousValue + (commission * parseFloat(currentValue.totalPrice)) / 100,
+    0,
+  );
+  const cart_subtotal = total_amount + commission_amount;
+  const vat_amount = (cart_subtotal * vat?.vat_name) / 100;
+  const tax_amount = (cart_subtotal * tax?.tax_name) / 100;
+  const total_bill_amount =
+    total_amount + vat_amount + tax_amount - commission_amount;
+
+  const [activeId, setActiveId] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const [errors, setError] = useState([]);
+
+  const [form_data, setFormData] = useState({
+    requisition_no: '',
+    requisition_category_id: '',
+    expected_date_of_delivery: '',
+    requisitor_contact_email: '',
+    requisitor_phone_no: '',
+    date_and_time: '',
+    test_sample: '',
+    supplier_id: '',
+    delivery_mode: '',
+    payment_mode: '',
+    recurring_order: '',
+    requisition_frequency_id: '',
+    frequency_start_date: '',
+    frequency_end_date: '',
+    special_instruction: '',
+
+    total_amount: '',
+    commission_amount: '',
+    vat_amount: '',
+    tax_amount: '',
+    total_bill_amount: '',
+    preferred_delivery_mode: '',
+    preferred_payment_mode: '',
+    preferred_payment_channel: '',
+    delivery_channel: '',
+  });
+
+  // const handleInput = (e) => {
+  //     setFormData({
+  //         ...form_data, [e.target.name]: e.target.value
+  //     });
+  // }
+
+  useEffect(() => {
+    http.get(`view-purchase-order/${id}`).then((res) => {
+      if (res.data.status === 200) {
+        console.log('view Purchase order', res.data);
+        setFormData(res.data.data);
+        setCart(res.data.req_details);
+        setCommission(res.data.data.commission);
+        setDMSelect(res.data.data.preferred_delivery_mode_id);
+        setPMSelect(res.data.data.preferred_payment_mode_id);
+        setPCSelect(res.data.data.preferred_payment_channel_id);
+        setDCSelect(res.data.data.delivery_channel_id);
+      } else {
+        setError(res.data.errors);
+      }
+    });
+
+    http.get('requisition-vat-tax').then((res) => {
+      // console.log(res.data.vat)
+      setVat(res.data.vat);
+      setTax(res.data.tax);
+    });
+    http.get('delivery-mode').then((res) => {
+      setDeliveryMode(res.data.data);
+    });
+    http.get('payment-mode').then((res) => {
+      setPaymentMode(res.data.data);
+    });
+    http.get('payment-channel').then((res) => {
+      setPaymentChannel(res.data.data);
+    });
+    http.get('delivery-channel').then((res) => {
+      setDeliveryChannel(res.data.data);
+    });
+  }, []);
+
+  const columnsData = [
+    {
+      title: 'Item Code',
+      field: 'drug_code',
+      cellStyle: {
+        textAlign: 'center',
+      },
+    },
+    {
+      title: 'Name',
+      field: 'macrohealth_sg',
+      width: '100 !important',
+      cellStyle: {
+        textAlign: 'center',
+      },
+    },
+
+    {
+      title: 'Box Type',
+      field: 'boxType',
+      render: (row) => (
+        <div className='text-capitalize text-center'>{row.boxType}</div>
+      ),
+    },
+    {
+      title: 'Box Size',
+      field: 'box_size',
+      render: (row) => (
+        <div className='text-capitalize text-center'>{row.box_size}</div>
+      ),
+    },
+    {
+      title: 'Pkt Size',
+      field: 'pktSize',
+      render: (row) => (
+        <div className='text-capitalize text-center'>{row.pktSize}</div>
+      ),
+    },
+    {
+      title: 'No. of Box/Bottle',
+      field: 'noOfBox',
+      render: (row) => (
+        <div className='w-[40%] mx-auto text-center'>
+          <input
+            value={row.noOfBox}
+            readOnly
+            className='form-control form-control-sm text-center'
+            type='number'
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'Unit',
+      field: 'unit',
+      render: (row) => (
+        <div className='text-capitalize text-center'>{row.unit}</div>
+      ),
+    },
+    {
+      title: 'Quantity',
+      field: 'req_unit',
+      render: (row) => (
+        <div className='w-[100%]'>
+          <input
+            className='form-control form-control-sm'
+            value={row.pcs}
+            readOnly
+            style={{ width: '80px', margin: 'auto' }}
+            type='number'
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'PP',
+      field: 'drug_price',
+      cellStyle: {
+        textAlign: 'center',
+      },
+    },
+    // {
+    //   title: 'VAT',
+    //   field: 'vat',
+    //   cellStyle: {
+    //     textAlign: 'center',
+    //   },
+    // },
+
+    {
+      title: 'Total Price',
+      field: 'totalPrice',
+      cellStyle: {
+        textAlign: 'center',
+      },
+    },
+    // {title: 'Action', field: 'action', render: (row) => <div className='flex justify-center gap-2'>
+    //         <div>
+    //             <button type="button" onClick={() => removeMedicine(row)} className="btn btn-sm action-btn"><i
+    //                 className="far fa-trash"></i></button>
+    //         </div>
+    //     </div>},
+  ];
+
+  const submitFormData = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    // formData.append('src_primary_key', total_amount);
+    // formData.append('src_primary_key', form_data.src_primary_key);
+    formData.append(
+      'requisition_no',
+      form_data.requisition_no == null ? '' : form_data.requisition_no,
+    );
+    formData.append(
+      'requisition_category_id',
+      form_data.requisition_category_id == null
+        ? ''
+        : form_data.requisition_category_id,
+    );
+    formData.append(
+      'expected_date_of_delivery',
+      form_data.expected_date_of_delivery == null
+        ? ''
+        : form_data.expected_date_of_delivery,
+    );
+    formData.append(
+      'requisitor_contact_email',
+      form_data.requisitor_contact_email == null
+        ? ''
+        : form_data.requisitor_contact_email,
+    );
+    formData.append(
+      'requisitor_phone_no',
+      form_data.requisitor_phone_no == null
+        ? ''
+        : form_data.requisitor_phone_no,
+    );
+    formData.append(
+      'date_and_time',
+      form_data.date_and_time == null ? '' : form_data.date_and_time,
+    );
+    formData.append(
+      'test_sample',
+      form_data.test_sample == null ? '' : form_data.test_sample,
+    );
+    formData.append(
+      'supplier_id',
+      form_data.supplier_id == null ? '' : form_data.supplier_id,
+    );
+    formData.append(
+      'delivery_mode',
+      form_data.delivery_mode == null ? '' : form_data.delivery_mode,
+    );
+    formData.append(
+      'payment_mode',
+      form_data.payment_mode == null ? '' : form_data.payment_mode,
+    );
+    formData.append(
+      'recurring_order',
+      form_data.recurring_order == null ? '' : form_data.recurring_order,
+    );
+    formData.append(
+      'requisition_frequency_id',
+      form_data.requisition_frequency_id == null
+        ? ''
+        : form_data.requisition_frequency_id,
+    );
+    formData.append(
+      'frequency_start_date',
+      form_data.frequency_start_date == null
+        ? ''
+        : form_data.frequency_start_date,
+    );
+    formData.append(
+      'frequency_end_date',
+      form_data.frequency_end_date == null ? '' : form_data.frequency_end_date,
+    );
+    formData.append(
+      'special_instruction',
+      form_data.special_instruction == null
+        ? ''
+        : form_data.special_instruction,
+    );
+    formData.append(
+      'requisition_category_id',
+      form_data.requisition_category_id == null
+        ? ''
+        : form_data.requisition_category_id,
+    );
+    formData.append('total_amount', total_amount.toFixed(2));
+    formData.append('commission_amount', commission_amount.toFixed(2));
+    formData.append('vat_amount', vat_amount.toFixed(2));
+    formData.append('tax_amount', tax_amount.toFixed(2));
+    formData.append('total_bill_amount', total_bill_amount.toFixed(2));
+
+    formData.append(
+      'preferred_delivery_mode',
+      form_data.preferred_delivery_mode,
+    );
+    formData.append('preferred_payment_mode', form_data.preferred_payment_mode);
+    formData.append(
+      'preferred_payment_channel',
+      form_data.preferred_payment_channel,
+    );
+    formData.append('delivery_channel', form_data.delivery_channel);
+    // formData.append('purchase_order_no_id', purchase_order_no_id);
+
+    http.post(`update-purchase-order/${id}`, formData).then((res) => {
+      console.log(res);
+      if (res.data.status === 200) {
+        console.log(cart);
+        cart.map((item, i) => {
+          const academic = new FormData();
+          academic.append('requisition_master_id', `${id}`);
+
+          academic.append('boxType', item.boxType);
+          academic.append('pktSize', item.pktSize);
+          academic.append('noOfBox', item.noOfBox);
+          academic.append('disc', item.disc);
+
+          // academic.append('pcs', item.pcs);
+          academic.append('unit', item.unit);
+          academic.append('req_unit', item.req_unit);
+          academic.append('totalPrice', item.totalPrice);
+
+          console.log('FromData Academic', academic);
+
+          if (item.src_primary_key) {
+            academic.append('drug_id', item.id);
+            http.post('save-requisitions-products', academic).then((res) => {
+              console.log('save-requisitions-products');
+            });
+          } else {
+            http
+              .post(`/update-requisitions-products/${item.id}`, academic)
+              .then((res) => {
+                console.log('update-supplier-social-media');
+              });
+          }
+        });
+
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: res.data.message,
+          timer: 2500,
+        });
+        navigate('/purchase-order');
+      } else {
+        setError(res.data.errors);
+      }
+    });
+  };
+
+  return (
+    <div className='page-content'>
+      <div className='custom-card patients-head '>
+        <h5 className='fw-normal custom_py-3 px-2  text-start mb-2 card-title'>
+          Purchase Order
+          <button
+            className='btn btn-sm btn-warning float-end'
+            onClick={() => navigate(-1)}
+          >
+            <i class='fal fa-long-arrow-left'></i> Back
+          </button>
+        </h5>
+      </div>
+
+      <form onSubmit={submitFormData}>
+        <div className='row'>
+          <div className='col-lg-6 col-md-6'>
+            <div className='card purchase_order_info'>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-md-12'>
+                    <h6 className='mb-3'>Purchase Order Info</h6>
+                    <div className='row mb-3'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Purchase Order No
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{form_data.purchase_order_no}</span>
+                      </div>
+                    </div>
+                    <div className='row mb-3'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        P.O. Date
+                      </label>
+                      <div className='col-sm-7'>
+                        :{' '}
+                        <span>
+                          {moment(form_data.po_create_date).format(
+                            'DD-MM-YYYY',
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                    <div className='row mb-3'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Requisition No.
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{form_data.requisition_no}</span>
+                      </div>
+                    </div>
+                    <div className='row mb-3'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        R.Q. Date
+                      </label>
+                      <div className='col-sm-7'>
+                        :{' '}
+                        <span>
+                          {form_data.date_and_time === null
+                            ? ''
+                            : moment(form_data.date_and_time).format(
+                                'DD-MM-YYYY',
+                              )}
+                        </span>
+                      </div>
+                    </div>
+                    <div className='row mb-3'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Submitted By
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{form_data.name}</span>
+                      </div>
+                    </div>
+                    <div className='row mb-3'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Exp. Date of Delivery
+                      </label>
+                      <div className='col-sm-7'>
+                        :{' '}
+                        <span>
+                          {form_data.expected_date_of_delivery === null
+                            ? ''
+                            : moment(
+                                form_data.expected_date_of_delivery,
+                              ).format('DD-MM-YYYY')}
+                        </span>
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Date
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{moment().format('DD-MM-YYYY')}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='col-lg-6 col-md-6 requisition_status_blog'>
+            <div className='card mb-2 supplier_info'>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-md-12'>
+                    <h6 className='mb-2'>Supplier Info</h6>
+                    <div className='row mb-1'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Category
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{form_data.requisition_category_name}</span>
+                      </div>
+                    </div>
+                    <div className='row mb-1'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Name
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{form_data.supplier_name}</span>
+                      </div>
+                    </div>
+                    <div className='row mb-1'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5'
+                      >
+                        Contact Email
+                      </label>
+                      <div className='col-sm-7'>
+                        : <span>{form_data.supplier_email}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='card'>
+              <div className='card-body'>
+                <div className='row'>
+                  <div className='col-md-12'>
+                    <h6 className='mb-1'>Delivery Details</h6>
+                    <div className='row'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5 col-form-label'
+                      >
+                        Preferred Delivery Mode
+                      </label>
+                      <div className='col-sm-7'>
+                        <Select
+                          options={delivery_mode}
+                          onChange={handleDMChange}
+                          placeholder={'Select'}
+                          isDisabled={true}
+                          getOptionLabel={(delivery_mode) =>
+                            `${delivery_mode.delivery_mode_name}`
+                          }
+                          getOptionValue={(delivery_mode) =>
+                            `${delivery_mode.id}`
+                          }
+                          value={delivery_mode.filter(
+                            (delivery_mode) =>
+                              delivery_mode.id ===
+                              Number(form_data.delivery_mode_id),
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5 col-form-label'
+                      >
+                        Preferred Payment Mode
+                      </label>
+                      <div className='col-sm-7'>
+                        <Select
+                          options={payment_mode}
+                          onChange={handlePMChange}
+                          placeholder={'Select'}
+                          isDisabled={true}
+                          getOptionLabel={(payment_mode) =>
+                            `${payment_mode.payment_mode_name}`
+                          }
+                          getOptionValue={(payment_mode) =>
+                            `${payment_mode.id}`
+                          }
+                          value={payment_mode.filter(
+                            (payment_mode) =>
+                              payment_mode.id ===
+                              Number(form_data.payment_mode_id),
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5 col-form-label'
+                      >
+                        Preferred Payment Channel
+                      </label>
+                      <div className='col-sm-7'>
+                        <Select
+                          options={payment_channel}
+                          onChange={handlePCChange}
+                          placeholder={'Select'}
+                          isDisabled={true}
+                          getOptionLabel={(payment_channel) =>
+                            `${payment_channel.payment_channel_name}`
+                          }
+                          getOptionValue={(payment_channel) =>
+                            `${payment_channel.id}`
+                          }
+                          value={payment_channel.filter(
+                            (payment_channel) =>
+                              payment_channel.id ===
+                              Number(form_data.preferred_payment_channel_id),
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <label
+                        htmlFor='exampleInputUsername2'
+                        className='col-sm-5 col-form-label'
+                      >
+                        Delivery Channel
+                      </label>
+                      <div className='col-sm-7'>
+                        <Select
+                          options={delivery_channel}
+                          onChange={handleDCChange}
+                          placeholder={'Select'}
+                          isDisabled={true}
+                          getOptionLabel={(delivery_channel) =>
+                            `${delivery_channel.delivery_channel_name}`
+                          }
+                          getOptionValue={(delivery_channel) =>
+                            `${delivery_channel.id}`
+                          }
+                          value={delivery_channel.filter(
+                            (delivery_channel) =>
+                              delivery_channel.id ===
+                              Number(form_data.delivery_channel_id),
+                          )}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/*requisition list*/}
+
+        <div className='row mt-2'>
+          <div className='col-md-12 col-mg-12'>
+            <MaterialTable
+              title={<h6 style={{ fontWeight: '500' }}>Product Details</h6>}
+              columns={columnsData}
+              data={cart}
+              options={{
+                actionsColumnIndex: -1,
+                selection: false,
+                search: false,
+                showTitle: true,
+                pageSize: 5,
+                pageSizeOptions: [5, 10, 20, 50, 100],
+                emptyRowsWhenPaging: false,
+                rowStyle: {
+                  fontSize: '.75rem',
+                  textAlign: 'center',
+                },
+                headerStyle: {
+                  fontSize: '.75rem',
+                  border: '1px solid #c9c9c9',
+                  textAlign: 'center',
+                  zIndex: '0',
+                  whiteSpace: 'nowrap',
+                },
+              }}
+            />
+          </div>
+        </div>
+
+        <Link
+          to={`/print-purchase-order/${id}`}
+          className='btn btn-sm btn-success float-end text-uppercase mt-3'
+        >
+          {' '}
+          <i className='fas fa-eye'></i> Preview
+        </Link>
+
+        {/* {
+                    (form_data.po_is_sent === null) ?
+                        <button type="button" onClick={() => proceedToApproval()} className="btn btn-sm btn-success float-end text-uppercase mt-3 me-2">
+                            <i className="fas fa-paper-plane"></i> Send PO
+                        </button>
+                        : ''
+                    // <button className="btn btn-sm btn-success float-end text-uppercase mt-3 me-2">
+                    //     <i className="fas fa-save"></i> Update
+                    // </button>
+                } */}
+      </form>
+      {/*requisition product*/}
+    </div>
+  );
+}
+
+export default ViewManagerPurchaseOrder;

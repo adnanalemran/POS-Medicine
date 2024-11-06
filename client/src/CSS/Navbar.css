@@ -1,0 +1,23 @@
+.custom_navbar .navbar .navbar-content .navbar-nav .nav-item.dropdown .dropdown-menu{
+    background-color: #fcfcfc !important;
+}
+.custom_navbar .dropdown-item:not(.dropdown-item:active, .dropdown-item.active):hover{
+    background-color: rgba(60, 100, 50, 0.1) !important;
+    color: #33c721 !important;
+}
+.custom_navbar .dropdown-item:not(.dropdown-item:active, .dropdown-item.active):hover svg{
+    color: #33c721 !important;
+}
+
+.custom_navbar .dropdown-item:hover{
+    /* background-color: rgba(60, 100, 50, 0.1) !important; */
+    /* color: #33c721 !important; */
+}
+.custom_navbar .dropdown-item:active{
+    text-decoration: none;
+    background-color: rgba(60, 100, 50, 0.1) !important;
+    color: #33c721 !important;
+}
+.custom_navbar .dropdown-item:active svg{
+    color: #0b0c0b !important;
+}

@@ -1,0 +1,5 @@
+ALTER TABLE `invoices` CHANGE `prescription_image` `prescription_image` LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+ALTER TABLE `invoices` ADD `invoice_type` VARCHAR(256) NULL AFTER `invoice_from`;
+ALTER TABLE `invoices` ADD `is_sync` BOOLEAN NULL DEFAULT FALSE AFTER `invoice_type`;
+ALTER TABLE `invoices` ADD `ref_invoice` VARCHAR(256) NULL AFTER `invoice_from`;

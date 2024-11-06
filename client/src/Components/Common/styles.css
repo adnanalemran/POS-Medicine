@@ -1,0 +1,46 @@
+.modal-sm {
+    max-width: 500px !important;
+    width: 100%;
+  }
+  
+  .modal-md {
+    max-width: 800px !important;
+    width: 100%;
+  }
+  
+  .modal-lg {
+    max-width: 1000px !important;
+    width: 100%;
+  }
+  
+  .modal-xl {
+    max-width: calc(100vw - 120px) !important;
+    width: 100%;
+  }
+  
+  .modal-full {
+    max-width: calc(100vw - 60px) !important;
+    width: 100%;
+  }
+  
+  .react-responsive-modal-container .modal-body {
+    padding: 20px 15px;
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .react-responsive-modal-container.modal-full .modal-body {
+    max-height: calc(100vh - 100px);
+  }
+  
+  .print-report-header {
+    display: none;
+  }
+  
+  @media print {
+    .print-report-header {
+      display: block;
+    }
+  }

@@ -1,0 +1,6 @@
+id,name,description,price,stock,manufacturer,drug_id,pkt_size,box_type,unit,rack,shelf,expire_date
+1,Angilock    25,none,15,500,Square Pharmaceuticals Ltd.,28235,10,leaf,pcs,Rack-1,Self-1,7/30/2023
+2,Diclofenac  Sodium,none,2,10,Square Pharmaceuticals Ltd.,28198,10,leaf,pcs,Rack-3,Self-2,7/21/2023
+3,Diclofenac Diethylam,none,2,10,Square Pharmaceuticals Ltd.,28199,10,leaf,pcs,Rack-3,Self-3,7/27/2023
+4,Fluconazole,none,2,10,Square Pharmaceuticals Ltd.,28201,10,leaf,pcs,Rack-2,Self-2,7/27/2023
+5,Atreon 1 gm,none,2,200,Square Pharmaceuticals Ltd.,28220,10,leaf,pcs,Rack-2,Self-2,7/27/2023

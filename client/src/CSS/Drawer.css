@@ -1,0 +1,23 @@
+.drawer_style:hover{
+    background-color: #E9F3DF;
+}
+/* .drawer_style:active{
+    background-color: rgba(120, 252, 127, 0.637);
+} */
+
+.custom_button .btn-check:checked + .btn-outline-success{
+    color: #080808;
+    background-color: #bccfa2;
+    border-color: #e4f1a3;
+}
+
+.custom_button .btn-outline-success {
+    color: #040404;
+    border-color: #cad57b;
+}
+
+.custom_button .btn-outline-success:hover {
+    color: #080808;
+    background-color: #d9e4cb;
+    border-color: #e4f1a3;
+}

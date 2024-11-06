@@ -1,0 +1,30 @@
+.details .MuiSvgIcon-root{
+    font-size: 1rem;
+}
+.select{
+    font-weight: normal;
+}
+.prevModal .MuiTableCell-root{
+    padding: 0;
+    text-align: center;
+}
+.prevModal .MuiTypography-h6{
+    font-size: 1rem;
+}
+.prevModal .MuiToolbar-gutters{
+    padding-left: '0';
+}
+.prevModal .MuiPaper-elevation2{
+    box-shadow: none;
+}
+@media (min-width: 600px){
+    .prevModal.MuiToolbar-gutters{
+        padding-left: '0';
+    }
+}
+.po_table table {
+    width: 100%;
+}
+.po-details p {
+    margin-bottom : 0.1rem;
+}

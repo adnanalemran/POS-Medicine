@@ -1,0 +1,12 @@
+.sidebar-style .sidebar .sidebar-body .nav .nav-item.nav-category:not(:first-child) {
+    margin-top: 0px ;
+}
+
+.sidebar-style .sidebar .sidebar-body .nav .nav-item .nav-link[aria-expanded=true] {
+    color: rgb(10, 9, 9);
+}
+/* .sidebar-style .sidebar .sidebar-body .nav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 25px 30px 25px !important;
+} */

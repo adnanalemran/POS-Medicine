@@ -1,0 +1,918 @@
+@import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+ 
+.nav-time {
+    color: #2D2D2C;
+    font-weight: 500;
+}
+
+.navbar-container {
+    background-color: #F0F1F8;
+    min-height: 40px;
+}
+
+
+.left-sidebar-container {
+    transition: all 0.3 ease-in;
+}
+
+.left-sidebar-head {
+    padding: 10px;
+}
+.form-control-sm {
+    height: 2rem;
+}
+
+.left-sidebar-head h6 {
+    margin-bottom: 0rem;
+}
+
+.left-sidebar-head i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.search-container i {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.left-sidebar-head span {
+    color: #737373;
+    font-size: 12px;
+}
+
+.left-sidebar-container .accordion-button:focus {
+    z-index: 3;
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+.left-sidebar-container .accordion-button:not(.collapsed) {
+    color: #2D2D2C;
+    background-color: #fff;
+    box-shadow: inset 0 calc(var(--bs-accordion-border-width) * -1) 0 var(--bs-accordion-border-color);
+}
+
+.left-sidebar-container .accordion-button::after {
+    background-size: 0.8rem;
+}
+
+.left-sidebar-container .accordion-button {
+    padding: 0.6rem 0.5rem;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.left-sidebar-container .accordion-body {
+    padding: 10px;
+}
+
+.left-sidebar-container ul {
+    padding-left: 0.1rem;
+    list-style-type: none;
+
+}
+
+.left-sidebar-container ul li {
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+
+}
+
+.left-sidebar-container ul li:hover {
+    background-color: #f5f5f5;
+}
+
+.form-check {
+    min-height: 1rem;
+    margin-top: 0;
+}
+
+.form-check .form-check-label {
+    margin-left: 0rem;
+    margin-top: 3px;
+}
+
+
+
+.btn-custom {
+    color: #fff;
+    padding: 5px 15px;
+    background-color: #69B128;
+    border: none;
+    border-radius: 3px;
+    width: 92%;
+    margin: 0 auto;
+}
+
+.left-sidebar-branding h6 {
+    font-family: 'Redressed', cursive;
+    font-size: 1.4rem;
+    margin-bottom: 0rem;
+}
+
+.left-sidebar-branding span {
+    color: #2D2D2C;
+    font-size: 1.2rem;
+    border-left: 3px solid #B9B9B9;
+}
+
+.left-sidebar-support h6 {
+    font-size: 13px;
+}
+
+.left-sidebar-support-text {
+    color: #A7A7A7;
+    font-size: 12px;
+    text-align: justify;
+}
+
+
+.medicine-category {
+    height: 90px;
+    border-radius: 7px;
+}
+
+.medicine-category h6 {
+    color: #2D2D2C;
+}
+
+.medicine-category span {
+    color: #737373;
+    font-size: 12px;
+}
+
+.medicine {
+    background-color: #F2F2F2;
+    border: 2px solid #DEDEDE;
+    border-radius: 5px;
+}
+
+.medicine .medicine-image {
+    background-color: #fff;
+    border: 1px solid #DEDEDE;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.medicine .medicine-image img {
+    height: 45px;
+    margin: 2px auto;
+}
+
+.medicine .medicine-info p {
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    color: #2D2D2C;
+}
+
+.medicine .medicine-info span {
+    color: #737373;
+    font-size: 12px;
+}
+
+.medicine-qty .counter-heading {
+    font-size: 12px;
+    color: #737373;
+}
+
+.medicine-qty .form-control {
+    display: block;
+    width: 60%;
+    padding: 0rem 0rem;
+    font-size: 12px;
+}
+
+.medicine-qty .form-control-sm {
+    border-radius: 0.25rem 0rem 0rem 0.25rem;
+}
+
+.medicine-qty .form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+
+/* .row>* {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+} */
+
+.search-result-container {
+    background-color: #ffff;
+    max-height: 160px;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index: 11;
+}
+
+.search-box-container {
+    position: relative;
+    font-size: 13px;
+    font-weight: 500;
+}
+.search-box-container .pHieT .ellipsis {
+    text-align: left;
+    width: 100%;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-box-container .dcVXPU > .wrapper {
+    color: #212121;
+    font-size: 13px;
+    font-family: Arial;
+    z-index: 3;
+    position: static;
+}
+.search-box-container .jMcrRR {
+    min-height: 34px;
+}
+.search-box-container .dcVXPU {
+    position: relative;
+    min-height: 36px;
+    height: auto;
+}
+.search-box-container .wrapper {
+    position:static
+}
+.search-format {
+    cursor: pointer;
+}
+.search-box-container .search-format p{
+    white-space: wrap !important;
+}
+
+.pos-home-container .form-control-sm {
+    font-size: 16px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 0;
+    font-size: 17px !important;
+    margin-top: 8px;
+    margin-right: 8px;
+}
+
+.g-doc-scroll::-webkit-scrollbar {
+    width: 5px;
+}
+
+.g-doc-scroll::-webkit-scrollbar-track {
+    background: #fff !important;
+    border-left: 1px solid #ddd;
+}
+
+.g-doc-scroll::-webkit-scrollbar-thumb {
+    background: rgb(0 0 0 / 20%) !important;
+    border-radius: 10px !important;
+    padding: 4px;
+}
+
+
+.active-medicine {
+    background-color: #e3e3e3;
+}
+.stock-out-medicine {
+    background-color: #f51111;
+    color: white;
+}
+
+.search-result-container p {
+    margin-bottom: 5px;
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+.cart-container p {
+    margin-bottom: 5px;
+    padding-left: 5px;
+    font-size: 16px;
+}
+
+.cart-table {
+    width: 100;
+}
+
+.cart-table tr td {
+    border: 0 !important;
+    padding: 3px;
+    font-size: 14px;
+    margin-top: 12px;
+
+}
+.cart-table-body{
+    text-align: left;
+}
+
+.cart-table tr td i {
+    cursor: pointer;
+}
+.bg-red {
+    background-color: 	#f42a41;
+}
+
+.cart-table-head td {
+    font-weight: 500;
+    border: none !important;
+}
+
+.cart-table-head td input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.cart-table-head {
+    border-bottom: 2px solid #ced4da;
+    background-color: #E9F3DF;
+    border-radius: 15px;
+}
+
+.filtered-medicine {
+    cursor: pointer;
+}
+.filtered-medicine:hover{
+    background-color: rgb(216, 216, 216);
+}
+.filtered-stock-out-medicine:hover{
+    background-color: #f51111;
+    color: white;
+}
+
+.medicine-inStock {
+    background-color: #E1EFD4;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #69B128
+}
+
+.pos-home-container {
+    position: relative;
+    transition: width 0.1s;
+    padding: 10px;
+}
+
+.home-footer-section {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+}
+
+.generated-bill-container h6 {
+    color: #AEAEAE;
+    font-size: 14px;
+}
+
+.generated-bill-container h3 {
+    color: #69B128;
+    font-size: 1.3rem;
+}
+
+.custom-shadow {
+    box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.08);
+}
+
+.generated-bill-image img {
+    height: 60px;
+}
+
+.right-side-cash-count {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.right-side-cash-count-number {
+    font-size: 19px;
+    font-weight: 500;
+    color: #69B128;
+}
+
+.right-sidebar-cashier h6 {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.right-sidebar-cashier span {
+    font-size: 11px;
+    color: #737373;
+    margin-left: 3px;
+}
+
+.right-sidebar-cashier-img img {
+    height: 37px;
+}
+
+.payment-method-img {
+    height: 15px;
+}
+
+.pos-payment-method-container .form-check-label {
+    font-size: 11px;
+}
+
+.pos-right-heading {
+    font-size: 14px;
+}
+
+.pos-invoice-content {
+    background-color: #E9F3DF;
+    border-radius: 5px;
+}
+
+.invoice-sub-item {
+    width: 140px;
+    display: inline-block;
+}
+
+.invoice-sub-item {
+    font-size: 12px;
+}
+
+.invoice-item-price {
+    font-size: 12px;
+}
+
+.invoice-total {
+    border-top: 1px dashed #B9B9B9
+}
+
+.invoice-total h6 {
+    font-size: 13px;
+}
+
+.invoice-total span {
+    font-size: 12px;
+}
+
+.pos-invoice-cash-content {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 4px 4px rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+}
+
+.pos-invoice-cash-content .invoice-sub-item {
+    font-weight: 500;
+}
+
+.custom-btn {
+    font-size: 14px;
+    background-color: #69B128;
+    border: 1px solid #69B128;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+.custom-btn-disabled{
+    font-size: 14px;
+    background-color: #d8d8d8;
+    border: 1px solid #ebebe8;
+    color: rgb(85, 82, 81);
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.custom-btn-outline {
+    font-size: 14px;
+    background-color: #fff;
+    border: none;
+    color: #363636;
+    padding: 3px 10px;
+    border-radius: 5px;
+    border: 1px solid #69B128;
+}
+
+.member-search-result p {
+    font-size: 10px;
+    margin-left: 3px;
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+
+.member-search-result h6 {
+    font-size: 12px;
+    margin-left: 3px;
+    margin-bottom: 0;
+}
+
+.pos-invoice-cash input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.special-discount-container label {
+    font-size: 12px;
+    margin-left: 3px;
+}
+
+.payment-card label {
+    font-size: 12px;
+}
+
+.print-all-sticker {
+    display: none;
+}
+
+.sticker-print {
+    width: 210.4px;
+}
+
+.sticker-patient-info-heading {
+    font-weight: 500;
+    font-size: 11px;
+}
+
+@media print {
+    .print-all-sticker {
+        display: block;
+    }
+
+    .sticker-print {
+    }
+}
+
+.sticker-qty {
+    padding: 0px 10px;
+    background-color: goldenrod;
+    margin-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    border-radius: 2px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.sticker-qr-code {
+    width: 30px;
+    margin: 4px;
+
+}
+
+.sticker-print p {
+    padding-left: 0px;
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+.sticker-print .sticker-print-rule {
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.doctor-add-icon {
+    cursor: pointer;
+}
+
+.left-popup label {
+    font-size: 12px;
+}
+
+.prescription-upload span {
+    font-weight: 500;
+    margin-top: 3px;
+}
+
+.member-search-result img {
+    height: 35px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .cart-table tr td {
+        padding: 3px;
+        font-size: 11px;
+    }
+
+    .search-result-container p {
+        margin-bottom: 0px;
+        padding-left: 5px;
+        font-size: 12px;
+    }
+
+    .pos-home-container .form-control-sm {
+        font-size: 12px;
+    }
+
+    .cart-sub-total {
+        font-size: 12px;
+    }
+
+    .custom-btn {
+        font-size: 11px;
+        background-color: #69B128;
+        border: 1px solid #69B128;
+        color: #fff;
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    .search-container i {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .form-control-sm {
+    }
+
+    .left-sidebar-head h6 {
+        font-size: 12px;
+    }
+
+    .left-sidebar-head i {
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .member-search h6 {
+        font-size: 10px;
+    }
+
+    .member-search-result p {
+        font-size: 8px;
+        margin-left: 3px;
+        margin-top: 3px;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .left-sidebar-container .accordion-button {
+        padding: 0.3rem 0.3rem;
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .left-sidebar-container ul li {
+        font-size: 12px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .left-sidebar-branding h6 {
+        font-family: 'Redressed', cursive;
+        font-size: 1.2rem;
+        margin-bottom: 0rem;
+    }
+
+    .left-sidebar-branding span {
+        color: #2D2D2C;
+        font-size: 1rem;
+        border-left: 3px solid #B9B9B9;
+    }
+
+    .left-sidebar-support h6 {
+        font-size: 10px;
+    }
+
+    .left-sidebar-support-text {
+        color: #A7A7A7;
+        font-size: 10px;
+
+    }
+
+    .btn-custom {
+        padding: 2px 9px;
+        width: 90%;
+        font-size: 12px;
+    }
+
+    .search-icon {
+        font-size: 15px !important;
+        margin-top: 7px;
+        margin-right: 7px;
+    }
+
+}
+
+.take-picture-container video {
+    height: 60%;
+}
+
+@media only screen and (max-width: 620px) {
+    .cart-table tr td {
+        padding: 2px;
+        font-size: 8px;
+    }
+    .medicine-inStock {
+        background-color: #E1EFD4;
+        padding: 3px 6px;
+        border-radius: 10px;
+        color: #69B128;
+    }
+
+    .search-result-container p {
+        margin-bottom: 0px;
+        padding-left: 5px;
+        font-size: 10px;
+    }
+
+    .pos-home-container .form-control-sm {
+        font-size: 12px;
+    }
+
+    .cart-sub-total {
+        font-size: 10px;
+    }
+
+    .custom-btn {
+        font-size: 9px;
+        background-color: #69B128;
+        border: 1px solid #69B128;
+        color: #fff;
+        padding: 2px;
+        border-radius: 5px;
+    }
+
+    .custom-btn-outline {
+        font-size: 9px;
+        background-color: #fff;
+        border: none;
+        color: #363636;
+        padding: 3px;
+        border-radius: 5px;
+        border: 1px solid #69B128;
+    }
+
+    .search-container i {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .form-control-sm {
+        padding: 0.15rem 0.15rem;
+        font-size: 9px;
+    }
+
+    .left-sidebar-head h6 {
+        font-size: 10px;
+    }
+
+    .left-sidebar-head span {
+        color: #737373;
+        font-size: 9px;
+    }
+
+    .left-sidebar-head {
+        padding: 4px;
+    }
+
+    .member-search-result img {
+        height: 27px;
+    }
+
+    .left-sidebar-head i {
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .member-search h6 {
+        font-size: 9px;
+    }
+
+    .member-search-result p {
+        font-size: 7px;
+        margin-left: 0px;
+        margin-top: 3px;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .left-sidebar-container .accordion-button {
+        padding: 0.3rem 0.3rem;
+        font-size: 11px;
+        font-weight: 400;
+    }
+
+    .left-side-management-link p {
+        padding: 7px 0px
+    }
+
+    .left-sidebar-container ul li {
+        font-size: 10px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .left-sidebar-branding {
+        padding: 2px;
+    }
+
+    .left-sidebar-support {
+        padding: 2px;
+    }
+
+    .left-sidebar-branding h6 {
+        font-family: 'Redressed', cursive;
+        font-size: 0.9rem;
+        margin-bottom: 0rem;
+    }
+
+    .left-sidebar-branding span {
+        color: #2D2D2C;
+        font-size: 0.8rem;
+        border-left: 2px solid #B9B9B9;
+    }
+
+    .left-sidebar-support h6 {
+        font-size: 9px;
+    }
+
+    .left-sidebar-support-text {
+        color: #A7A7A7;
+        font-size: 9px;
+
+    }
+
+    .btn-custom {
+        padding: 2px 9px;
+        width: 90%;
+        font-size: 10px;
+    }
+
+    .search-icon {
+        font-size: 15px !important;
+        margin-top: 7px;
+        margin-right: 7px;
+    }
+
+    .prescription-upload span {
+        line-height: 0px !important;
+    }
+    .right-sidebar-cashier h6 {
+        font-size: 12px;
+        margin-bottom: 0;
+    }
+    .right-side-cash-count-number {
+        font-size: 15px;
+        font-weight: 500;
+        color: #69B128;
+    }
+    .right-side-cash-count {
+        font-size: 11px;
+        font-weight: 500;
+    }
+    .pos-right-heading {
+        font-size: 11px;
+    }
+    .invoice-total h6 {
+        font-size: 11px;
+    }
+    .invoice-sub-item {
+        width: 140px;
+        display: inline-block;
+        font-size: 11px;
+    }    
+    
+}
+
+
+
+.css-1s2u09g-control {
+    max-height: 31px !important;
+    min-height: 0px !important;
+}
+.css-1pahdxg-control{
+    max-height: 31px !important;
+    min-height: 0px !important;
+    border-color: black !important;
+    box-shadow: 0 0 0 0px #ced4da !important;
+    border: 1px solid #ced4da;
+    border-color: #80bdff !important;
+}
+.css-319lph-ValueContainer {
+    padding: 0px 8px !important;
+    margin-bottom: 5px !important;
+}
+.css-1hb7zxy-IndicatorsContainer{
+    margin-top: -5px !important;
+}
+.css-1okebmr-indicatorSeparator{
+    display: none !important;
+}
+
+.css-1insrsq-control {
+    max-height: 31px !important;
+    min-height: 0px !important;
+}
+
+.css-319lph-ValueContainer {
+    padding: 0px 8px !important;
+    margin-bottom: 5px !important;
+}
+.prescription-img {
+    width: 100%;
+    /* max-height: 400px; */
+}
+

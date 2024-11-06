@@ -1,0 +1,116 @@
+.search__bill .MuiFormControl-root {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    margin-right: 10px !important;
+    padding-top: 2px !important;
+    font-size: 12px !important;
+    width: 100% !important;
+}
+.search__bill .css-1ptx2yq-MuiInputBase-root-MuiInput-root:after {
+    border-bottom: 0px !important;
+}
+.search__bill .btn__sm__filter{
+    padding: 4px 2px !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+    background: #fff;
+    border-color: hsl(0, 0%, 80%);
+}
+.search__bill .btn__sm{
+    padding: 4px 2px !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+    background: #69B128;
+    border-color: #69B128;
+    color: #fff;
+}
+.billing__card .card-body {
+    flex: 1 1 auto;
+    padding: 1.5rem 0.7rem;
+}
+.billing__img img {
+    height: 110px;
+    width: 110px;
+    padding: 14px;
+    border-radius: 70px;
+}
+.billing__card .btn__order__received {
+    padding: 4px 10px !important;
+    border-color: #001EDE;
+    background: #eff0f8;
+    color: #001EDE;
+    width: 40%;
+}
+.hr__order {
+    padding: 1px;
+}
+.billing__card .btn__order__arrived {
+    padding: 4px 10px !important;
+    border-color: #EFB038;
+    background: #f7f4f1;
+    color:#EFB038;
+    width: 40%;
+}
+.billing__card .btn__order__deliverd {
+    padding: 4px 10px !important;
+    border-color: #30C65A;
+    background: #f2faf5;
+    color: #30C65A;
+    width: 40%;
+}
+.billing__card .btn__order__canceled {
+    padding: 4px 10px !important;
+    border-color: #E85E5E;
+    background: #f0eaea;
+    color: #E85E5E;
+    width: 40%;
+}
+.product__Logo__img img {
+    height: 65px;
+    width: 100px;
+}
+.product__scaner__img img {
+    height: 50px;
+    width: 200px;
+}
+.product__list .btn__sm{
+    padding: 4px 8px !important;
+    margin-top: 0px !important;
+    background: #69B128;
+    border-color: #69B128;
+    color: #fff;
+}
+.product__list .btn__pro{
+    padding: 4px 8px !important;
+    margin-top: 0px !important;
+    width: 10%;
+    background: #69B128;
+    border-color: #69B128;
+    color: #fff;
+    white-space: nowrap;
+}
+.product__list .btn__view__pdf{
+    padding: 4px 8px !important;
+    margin-top: 0px !important;
+    width: 10%;
+    background: #fff;
+    border-color: #69B128;
+    color: #000;
+    white-space: nowrap;
+}
+
+/* print start  */
+.card__print{
+    display: block;
+    visibility: hidden !important ;
+    height: 0px;
+}
+@media print {
+    .card__print{
+        display: block;
+        visibility: visible !important ;
+    }
+ }
+ /* print end  */

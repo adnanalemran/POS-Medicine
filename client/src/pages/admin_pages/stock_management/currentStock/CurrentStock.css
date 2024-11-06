@@ -1,0 +1,23 @@
+/* Table material  */
+.stock .MTableToolbar-highlight-6{
+    background-color: rgb(255 255 255);
+    color: black;
+}
+.stock .MuiCheckbox-colorSecondary.Mui-checked {
+    color: #507e23;
+}
+
+/* .stock-table .MuiIcon-root {
+    width: 0.1em !important;
+    height: 0.5em !important;
+    font-size: 1rem !important;
+} */
+.stock-table .MuiTableSortLabel-icon {
+    opacity: 0;
+    font-size: 9px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.stock-table th span div {
+    margin-left: 2px !important;
+}
